@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.login {
+  background-color: #addfdc;
+  border: 1px solid #addfdc;
+}
+.login:hover {
+  background-color: #b2d7d5;
+  border: 1px solid #addfdc;
+}
+.register {
+  color: #addfdc;
+  border: 1px solid #addfdc;
+}
+.register:hover {
+  background-color: #addfdc;
+  border: 1px solid #addfdc;
+}
+.avatar {
+  background-color: #ffffff;
+  font-size: 30px;
+  color: #addfdc;
+}
+.hero-img {
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: background-image 0.2s linear;
+}
+
+.prev,
+.next {
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-size: 50px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.hero-text {
+  position: absolute;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px black;
+}
+.hero-title {
+  font-size: 3.5rem;
+}
+/* ===============================product============================= */
+
+.product-container {
+  margin-top: 100px !important;
+}
+.img-btns {
+  overflow: hidden;
+}
+
+.card-button {
+  position: absolute;
+  bottom: -100px;
+  opacity: 0;
+  transition: 0.8s;
+  background-color: #fff;
+  padding: 3px 0px 3px;
+  border-radius: 10px 0 0 10px;
+}
+
+.eye {
+  padding: 5px 10px;
+  font-size: 20px;
+  border: 2px solid #fff;
+  transition: 0.5s;
+}
+
+.eye:hover {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #000;
+  border-radius: 10px 0 0 10px;
+}
+
+.bi-bag-plus {
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #000;
+  transition: 0.5s;
+  padding: 8px 12px;
+}
+
+.bi-bag-plus:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #000;
+}
+
+.img-btns:hover .card-button {
+  bottom: 10px;
+  opacity: 1;
+}

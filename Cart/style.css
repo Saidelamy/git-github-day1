@@ -1,0 +1,21 @@
+img {
+  width: 100%;
+  height: auto;
+}
+.checkout h1 {
+  margin: 50px 0;
+}
+
+.product-cart {
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #000;
+  transition: 0.5s;
+  padding: 8px 12px;
+  width: 45%;
+}
+.product-cart:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #000;
+}
