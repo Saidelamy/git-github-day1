@@ -23,6 +23,23 @@ img {
   background-color: #addfdc;
   border: 1px solid #addfdc;
 }
+
+.cart-container {
+  position: relative;
+}
+.cart-container p {
+  position: absolute;
+  background-color: darkblue;
+  padding: 2px 5px;
+  border-radius: 50%;
+  color: #fff;
+  right: -15px;
+  top: -1px;
+  font-size: 12px;
+}
+.cart-container i {
+  font-size: 30px;
+}
 .avatar {
   background-color: #ffffff;
   font-size: 30px;
@@ -55,7 +72,17 @@ img {
 
 .product-container {
   margin-top: 100px !important;
+  max-width: 1400px;
+
+  aside {
+    position: sticky;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    height: 80vh;
+    padding: 50px;
+    top: 50px;
+  }
 }
+
 .img-btns {
   overflow: hidden;
 }
@@ -64,7 +91,7 @@ img {
   position: absolute;
   bottom: -100px;
   opacity: 0;
-  transition: 0.8s;
+  transition: 0.5s;
   background-color: #fff;
   padding: 3px 0px 3px;
   border-radius: 10px 0 0 10px;
@@ -101,4 +128,14 @@ img {
 .img-btns:hover .card-button {
   bottom: 10px;
   opacity: 1;
+}
+
+.card {
+  /* box-shadow: 1px 1px 5px 1px rgb(0, 0, 0); */
+  border: 0;
+}
+.product-cards {
+  margin-left: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 30px;
 }

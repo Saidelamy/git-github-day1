@@ -1,30 +1,3 @@
-let products = [
-  {
-    id: 1,
-    name: "Book",
-    price: 200,
-    quantity: 5,
-    category: "school",
-    img: "/images/book.jpg",
-  },
-  {
-    id: 2,
-    name: "Pen",
-    price: 100,
-    quantity: 20,
-    category: "school",
-    img: "/images/pen.jpg",
-  },
-  {
-    id: 3,
-    name: "Coffee",
-    price: 50,
-    quantity: 15,
-    category: "drink",
-    img: "/images/coffe.avif",
-  },
-];
-
 let slider = [
   {
     img: "/images/hero-woman4.jpg",
@@ -100,3 +73,186 @@ showImage();
 setInterval(function () {
   nextHero();
 }, 3000);
+
+async function getProducts() {
+  try {
+    const response = await fetch("https://dummyjson.com/products");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Carts Data:", data);
+    displayProductInBody(data);
+  } catch (error) {
+    console.error("Error fetching carts:", error);
+  }
+}
+
+function displayProductInBody(el) {
+  const productcard = document.querySelector(".product-cards");
+  productcard.innerHTML = "";
+  console.log(el);
+  const fragment = document.createDocumentFragment();
+  el.products.forEach((product) => {
+    const card = document.createElement("div");
+    card.className = "col-4";
+    card.innerHTML = `            <div class="card">
+              <div
+                class="img-btns position-relative d-flex justify-content-center"
+              >
+                <img
+                  src=${product.images[0]}
+                  width="800"
+                  height="1034"
+                  alt="..."
+                />
+                <div class="card-button d-flex">
+                  <button class="eye bg-transparent">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                 <button 
+  onclick="addToCart()" 
+  class="border-0 bg-transparent">
+  <i class="bi bi-bag-plus"> Add to Cart</i>
+</button>
+                </div>
+              </div>
+              <div class="card-body text-start">
+                <h5 class="card-title my-2">${product.title}</h5>
+                <p class="card-text">${product.price}$</p>
+              </div>
+            </div>`;
+
+    card.querySelector(".add-to-cart").addEventListener("click", () => {
+      addToCart(
+        product.id,
+        product.title,
+        product.price,
+        product.discountPercentage,
+        product.description,
+        product.brand,
+        product.category,
+        product.rating
+      );
+    });
+
+    fragment.append(card);
+  });
+  productcard.append(fragment);
+}
+
+async function getProducts() {
+  try {
+    const response = await fetch("https://dummyjson.com/products");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    displayProductInBody(data.products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  }
+}
+
+function displayProductInBody(products) {
+  const productcard = document.querySelector(".product-cards");
+  productcard.innerHTML = "";
+
+  const fragment = document.createDocumentFragment();
+
+  products.forEach((product) => {
+    const card = document.createElement("div");
+    card.className = "col-4";
+
+    const imgSrc = product.images?.[0] || "https://via.placeholder.com/300";
+
+    card.innerHTML = `
+      <div class="card">
+        <div class="img-btns position-relative d-flex justify-content-center">
+          <img src="${imgSrc}" width="800" height="1034" alt="${product.title}" />
+          <div class="card-button d-flex">
+            <button class="eye bg-transparent">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="add-to-cart border-0 bg-transparent">
+              <i class="bi bi-bag-plus"> Add to Cart</i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body text-start">
+          <h5 class="card-title my-2">${product.title}</h5>
+          <p class="card-text">${product.price}$</p>
+        </div>
+      </div>
+    `;
+
+    card.querySelector(".add-to-cart").addEventListener("click", () => {
+      addToCart(
+        product.id,
+        product.title,
+        product.price,
+        product.discountPercentage,
+        product.description,
+        product.brand,
+        product.category,
+        product.rating,
+        imgSrc
+      );
+    });
+
+    fragment.append(card);
+  });
+
+  productcard.append(fragment);
+}
+
+function addToCart(
+  id,
+  title,
+  price,
+  discountPercentage,
+  description,
+  brand,
+  category,
+  rating,
+  imgSrc
+) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  let existingProduct = cart.find((el) => el.id === id);
+
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    cart.push({
+      id,
+      title,
+      price,
+      discountPercentage,
+      description,
+      brand,
+      category,
+      rating,
+      quantity: 1,
+      imgSrc,
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const cartCount = document.querySelector(".cart-count");
+  if (cartCount) {
+    cartCount.textContent = totalItems;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  getProducts();
+  updateCartCount();
+});
