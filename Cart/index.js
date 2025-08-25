@@ -1,7 +1,8 @@
 function renderCart() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const cartItems = document.querySelector(".cart-items");
-  const cartTotal = document.querySelector(".cart-total");
+  const cartBody = document.querySelector(".checkout");
+  console.log(cartItems);
 
   cartItems.innerHTML = "";
   let total = 0;
@@ -17,7 +18,7 @@ function renderCart() {
 
       row.innerHTML = `<div class="row">
         <div class="col-1">
-          <img src="${item.imgSrc}" alt="" />
+          <img src="${item.imgSrc || item.thumbnail}" alt="" />
         </div>
         <div class="col-4">
           <div class="d-flex justify-content-between align-items-center">
@@ -68,6 +69,12 @@ function renderCart() {
 
       cartItems.appendChild(row);
     });
+
+    cartBody
+      .querySelector(".compelete-checkout")
+      .addEventListener("click", () => {
+        window.location.href = "../checkout/index.html";
+      });
 
     let totalPriceForAll = cart.reduce(
       (acc, el) => acc + el.price * el.quantity,

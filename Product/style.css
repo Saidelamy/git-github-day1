@@ -50,3 +50,14 @@
 .product {
   margin-bottom: 100px;
 }
+#product-details {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+#product-details h1 {
+  margin-bottom: 30px;
+}
+
+#product-details span {
+  font-weight: 800;
+}

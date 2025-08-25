@@ -1,26 +1,24 @@
 let slider = [
   {
-    img: "/images/hero-woman4.jpg",
-    title: "New Collection",
-    desc: "Shop the latest trends now, Shop the latest trends now, Shop the latest trends now",
-    position: { top: "30%", left: "15%" },
+    img: "/images/Groceries.png",
+    title: "Groceries",
+    desc: "Vel quo asperiores impedit fuga iure aut minima reiciendis earum, saepe ullam et dolorum dicta itaque placeat esse tempora ipsam neque cum.",
   },
   {
-    img: "/images/hero-woman2.jpg",
-    title: "Summer Sale",
+    img: "/images/Furniture.png",
+    title: "Furniture",
     desc: "Shop the latest trends now, Shop the latest trends now.",
-    position: { bottom: "300px", left: "250px" },
   },
   {
-    img: "/images/hero-man.jpg",
-    title: "Accessories",
-    desc: "Shop the latest trends now, Shop the latest trends now.",
-    position: { top: "30%", right: "10%", transform: "translateX(-50%)" },
+    img: "/images/clothes.png",
+    title: "Clothes",
+    desc: "Vel quo asperiores impedit fuga iure aut minima reiciendis earum, saepe ullam et dolorum dicta itaque placeat esse tempora ipsam neque cum",
   },
-
-  //   "/images/hero-woman4.jpg",
-  //   "/images/hero-woman2.jpg",
-  //   "/images/hero-woman1.jpg",
+  {
+    img: "/images/fragrances.png",
+    title: "Fragrances",
+    desc: "Vel quo asperiores impedit fuga iure aut minima reiciendis earum, saepe ullam et dolorum dicta itaque placeat esse tempora ipsam neque cum",
+  },
 ];
 
 let next = document.querySelector(".next");
@@ -29,22 +27,19 @@ let heroImg = document.querySelector(".hero-img");
 let heroTitle = document.querySelector(".hero-title");
 let heroDesc = document.querySelector(".hero-desc");
 let heroText = document.querySelector(".hero-text");
+let cartIcon = document.querySelector(".cart-icon");
+let login = document.querySelector(".login");
+let register = document.querySelector(".register");
+let logout = document.querySelector(".logout");
 
 let index = 0;
 
 function showImage() {
   let slide = slider[index];
 
-  heroImg.style.backgroundImage = `url(${slide.img})`;
-
+  heroImg.setAttribute("src", slide.img);
   heroTitle.textContent = slide.title;
   heroDesc.textContent = slide.desc;
-
-  heroText.style.top = "";
-  heroText.style.bottom = "";
-  heroText.style.left = "";
-  heroText.style.right = "";
-  heroText.style.transform = "";
 
   for (let prop in slide.position) {
     heroText.style[prop] = slide.position[prop];
@@ -81,73 +76,6 @@ async function getProducts() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("Carts Data:", data);
-    displayProductInBody(data);
-  } catch (error) {
-    console.error("Error fetching carts:", error);
-  }
-}
-
-function displayProductInBody(el) {
-  const productcard = document.querySelector(".product-cards");
-  productcard.innerHTML = "";
-  console.log(el);
-  const fragment = document.createDocumentFragment();
-  el.products.forEach((product) => {
-    const card = document.createElement("div");
-    card.className = "col-4";
-    card.innerHTML = `            <div class="card">
-              <div
-                class="img-btns position-relative d-flex justify-content-center"
-              >
-                <img
-                  src=${product.images[0]}
-                  width="800"
-                  height="1034"
-                  alt="..."
-                />
-                <div class="card-button d-flex">
-                  <button class="eye bg-transparent">
-                    <i class="bi bi-eye"></i>
-                  </button>
-                 <button 
-  onclick="addToCart()" 
-  class="border-0 bg-transparent">
-  <i class="bi bi-bag-plus"> Add to Cart</i>
-</button>
-                </div>
-              </div>
-              <div class="card-body text-start">
-                <h5 class="card-title my-2">${product.title}</h5>
-                <p class="card-text">${product.price}$</p>
-              </div>
-            </div>`;
-
-    card.querySelector(".add-to-cart").addEventListener("click", () => {
-      addToCart(
-        product.id,
-        product.title,
-        product.price,
-        product.discountPercentage,
-        product.description,
-        product.brand,
-        product.category,
-        product.rating
-      );
-    });
-
-    fragment.append(card);
-  });
-  productcard.append(fragment);
-}
-
-async function getProducts() {
-  try {
-    const response = await fetch("https://dummyjson.com/products");
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
     displayProductInBody(data.products);
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -164,14 +92,14 @@ function displayProductInBody(products) {
     const card = document.createElement("div");
     card.className = "col-4";
 
-    const imgSrc = product.images?.[0] || "https://via.placeholder.com/300";
+    const imgSrc = product.images?.[0];
 
     card.innerHTML = `
       <div class="card">
         <div class="img-btns position-relative d-flex justify-content-center">
           <img src="${imgSrc}" width="800" height="1034" alt="${product.title}" />
           <div class="card-button d-flex">
-            <button class="eye bg-transparent">
+            <button class="eye bg-transparent view-details">
               <i class="bi bi-eye"></i>
             </button>
             <button class="add-to-cart border-0 bg-transparent">
@@ -198,6 +126,12 @@ function displayProductInBody(products) {
         product.rating,
         imgSrc
       );
+    });
+
+    // navigate navbar
+    card.querySelector(".view-details").addEventListener("click", () => {
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+      window.location.href = "Product/index.html";
     });
 
     fragment.append(card);
@@ -240,6 +174,9 @@ function addToCart(
 
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
+  swal("add successfully!", "المنتج اتضاف للعربة بنجاح", "success", {
+    button: "done!",
+  });
 }
 
 function updateCartCount() {
@@ -255,4 +192,20 @@ function updateCartCount() {
 document.addEventListener("DOMContentLoaded", () => {
   getProducts();
   updateCartCount();
+});
+
+// navigate navbar
+
+cartIcon.addEventListener("click", () => {
+  window.location.href = "Cart/index.html";
+});
+
+login.addEventListener("click", () => {
+  window.location.href = "login/index.html";
+});
+register.addEventListener("click", () => {
+  window.location.href = "register/index.html";
+});
+logout.addEventListener("click", () => {
+  window.location.href = "login/index.html";
 });

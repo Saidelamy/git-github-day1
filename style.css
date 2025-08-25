@@ -45,28 +45,61 @@ img {
   font-size: 30px;
   color: #addfdc;
 }
-.hero-img {
-  height: 80vh;
+.hero {
+  background-image: url(./images/hero.avif);
   background-size: cover;
   background-position: center;
+  height: 90vh;
   position: relative;
-  transition: background-image 0.2s linear;
 }
 
+.hero-container {
+  z-index: 2;
+  max-width: 1400px;
+  margin: auto;
+}
+.hero-bg {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  height: 90vh;
+}
+.hero-text {
+  color: #ffffff;
+  text-shadow: 2px 2px 5px black;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hero-text button {
+  background-color: #000;
+  color: #fff;
+  padding: 15px 30px;
+  width: 50%;
+  border: #000;
+}
+.hero-text button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+}
+
+.arrows {
+  position: absolute;
+  top: 10%;
+  width: 100vw;
+}
 .prev,
 .next {
   border: 0;
   color: rgb(255, 255, 255);
   font-size: 50px;
   background-color: rgba(0, 0, 0, 0.2);
-}
-.hero-text {
-  position: absolute;
-  color: #ffffff;
-  text-shadow: 2px 2px 5px black;
-}
-.hero-title {
-  font-size: 3.5rem;
 }
 /* ===============================product============================= */
 
@@ -76,7 +109,7 @@ img {
 
   aside {
     position: sticky;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     height: 80vh;
     padding: 50px;
     top: 50px;
@@ -91,7 +124,7 @@ img {
   position: absolute;
   bottom: -100px;
   opacity: 0;
-  transition: 0.5s;
+  transition: 0.2s;
   background-color: #fff;
   padding: 3px 0px 3px;
   border-radius: 10px 0 0 10px;
@@ -136,6 +169,43 @@ img {
 }
 .product-cards {
   margin-left: 30px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   padding: 30px;
+}
+
+/* category */
+.category {
+  margin-top: 100px !important;
+  margin-bottom: 100px !important;
+  max-width: 1000px;
+}
+.category h2 {
+  margin-bottom: 50px !important;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+  width: 300px;
+}
+
+.category img {
+  width: 100%;
+}
+.subCat {
+  position: relative;
+}
+.subCat h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  z-index: 2;
+}
+.subcatBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }

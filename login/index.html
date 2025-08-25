@@ -45,8 +45,10 @@
     <!-- form  -->
 
     <main class="container row m-auto form-container">
-      <form class="col-6 d-flex mt-5 justify-content-center">
+      <form class="col-6 d-flex mt-5 justify-content-center loginForm">
         <h2>Login</h2>
+        <p id="loginError"></p>
+
         <div class="input-container">
           <label for="email">Email: </label>
           <input
@@ -55,6 +57,7 @@
             name="email"
             id="email"
           />
+          <p id="emailError"></p>
         </div>
         <div class="input-container">
           <label for="password">Password: </label>
@@ -64,6 +67,7 @@
             name="password"
             id="password"
           />
+          <p id="passwordError"></p>
         </div>
 
         <button class="">Login</button>
@@ -142,6 +146,7 @@
       </p>
     </footer>
 
-    <script src="/Login/index.js"></script>
+    <script src="./index.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </body>
 </html>

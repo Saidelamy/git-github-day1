@@ -51,17 +51,18 @@
         <img src="../images/register.jpg" alt="" />
       </div>
       <div class="col-1"></div>
-      <form class="col-6 d-flex mt-5 justify-content-center">
+      <form class="col-6 d-flex mt-5 justify-content-center registerForm">
         <h2>Register</h2>
         <div class="input-container">
-          <label for="firstName">Full Name: </label>
+          <label for="fullName">Full Name: </label>
           <input
             class=""
             type="text"
             placeholder="Enter Your First Name"
-            name="firstName"
-            id="firstName"
+            name="fullName"
+            id="fullName"
           />
+          <p id="fullNameError"></p>
         </div>
 
         <div class="input-container">
@@ -72,6 +73,7 @@
             name="email"
             id="email"
           />
+          <p id="emailError"></p>
         </div>
         <div class="input-container">
           <label for="password">Password: </label>
@@ -81,6 +83,7 @@
             name="password"
             id="password"
           />
+          <p id="passwordError"></p>
         </div>
         <div class="input-container">
           <label for="confirmPassword">Confirm Password: </label>
@@ -90,9 +93,10 @@
             name="confirmPassword"
             id="confirmPassword"
           />
+          <p id="confirmPasswordError"></p>
         </div>
 
-        <button class=""><a href="../login/index.html">Submit</a></button>
+        <button type="submit" class="submitButton">Submit</button>
       </form>
     </main>
 
@@ -162,6 +166,7 @@
       </p>
     </footer>
 
-    <script src="/Login/index.js"></script>
+    <script src="./index.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </body>
 </html>
