@@ -1,3 +1,5 @@
+import { navAndFooter } from "../utils/navAndFooter.js";
+
 const registerForm = document.querySelector(".registerForm");
 const fullNameInput = document.getElementById("fullName");
 const emailInput = document.getElementById("email");
@@ -83,3 +85,5 @@ function registerConfirm(e) {
 }
 
 registerForm.addEventListener("submit", registerConfirm);
+
+navAndFooter();

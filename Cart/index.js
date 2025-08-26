@@ -16,27 +16,28 @@ function renderCart() {
       total += parseFloat(itemTotal);
       console.log(cart.length);
 
-      row.innerHTML = `<div class="row">
-        <div class="col-1">
+      row.innerHTML = `<div class="row align-items-center">
+        <div class="col-2">
           <img src="${item.imgSrc || item.thumbnail}" alt="" />
         </div>
-        <div class="col-4">
+        <div class="col-10">
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <h5>${item.title}</h5>
               <h6>${item.category.toUpperCase()}</h6>
-              <p>${item.brand}</p>
+              <p>${item.brand || ""}</p>
             </div>
-            <div class="d-flex gap-3 cart-button">
+<div class="d-flex gap-5 align-items-center">            <div class="d-flex gap-3 cart-button">
               <button class="increase"><i class="bi bi-plus-lg"></i></button>
               <span class="mx-2">${item.quantity}</span>
               <button class="decrease"><i class="bi bi-dash"></i></button>
             </div>
+            <div class="d-flex justify-content-end align-items-center gap-3">
+              <p class="text-center m-0 ">${itemTotal}$</p>
+              <button class="btn btn-sm btn-danger remove"><i class="bi bi-trash"></i></button>
+            </div></div>
           </div>
-          <div class="d-flex justify-content-end align-items-center gap-3">
-          <button class="btn btn-sm btn-danger remove"><i class="bi bi-trash"></i></button>
-          <p class="text-center">${itemTotal}$</p>
-          </div>
+
         </div>
       </div>`;
 

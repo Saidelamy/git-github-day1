@@ -1,3 +1,5 @@
+import { navAndFooter } from "./utils/navAndFooter.js";
+
 let slider = [
   {
     img: "/images/Groceries.png",
@@ -27,10 +29,7 @@ let heroImg = document.querySelector(".hero-img");
 let heroTitle = document.querySelector(".hero-title");
 let heroDesc = document.querySelector(".hero-desc");
 let heroText = document.querySelector(".hero-text");
-let cartIcon = document.querySelector(".cart-icon");
-let login = document.querySelector(".login");
-let register = document.querySelector(".register");
-let logout = document.querySelector(".logout");
+
 let spinner = document.getElementById("spinner");
 let productContainer = document.querySelector(".product-container");
 
@@ -42,10 +41,6 @@ function showImage() {
   heroImg.setAttribute("src", slide.img);
   heroTitle.textContent = slide.title;
   heroDesc.textContent = slide.desc;
-
-  for (let prop in slide.position) {
-    heroText.style[prop] = slide.position[prop];
-  }
 }
 function nextHero() {
   index++;
@@ -102,14 +97,12 @@ function displayProductInBody(products) {
   filteredProducts = products;
 
   renderPage();
-  const fragment = document.createDocumentFragment();
-
-  productcard.append(fragment);
 }
 
 function renderPage() {
   const productcard = document.querySelector(".product-cards");
   productcard.innerHTML = "";
+
   const start = (currentPage - 1) * productsPerPage;
   const end = start + productsPerPage;
 
@@ -118,14 +111,16 @@ function renderPage() {
   if (paginatedProducts.length === 0) {
     productcard.innerHTML = `
       <div class="col-12 text-center py-5">
-        <h4 class="text-muted">No products match your filters 😔</h4>
+        <h4 class="text-muted">No products match your filters</h4>
       </div>
     `;
     document.getElementById("pagination").innerHTML = "";
     return;
   }
+
   const fragment = document.createDocumentFragment();
 
+  // عرض المنتجات
   paginatedProducts.forEach((product) => {
     const card = document.createElement("div");
     card.className = "col-4";
@@ -166,7 +161,6 @@ function renderPage() {
       );
     });
 
-    // navigate navbar
     card.querySelector(".view-details").addEventListener("click", () => {
       localStorage.setItem("selectedProduct", JSON.stringify(product));
       window.location.href = "Product/index.html";
@@ -174,6 +168,8 @@ function renderPage() {
 
     fragment.append(card);
   });
+
+  productcard.append(fragment);
   renderPagination();
 }
 
@@ -185,7 +181,7 @@ function renderPagination() {
   const prevBtn = document.createElement("button");
   prevBtn.textContent = "prev";
   prevBtn.disabled = currentPage === 1;
-  prevBtn.classList.add("btn", "btn-sm", "btn-outline-primary", "mx-1");
+  prevBtn.classList.add("prev-btn");
   prevBtn.addEventListener("click", () => {
     currentPage--;
     renderPage();
@@ -195,12 +191,7 @@ function renderPagination() {
   for (let i = 1; i <= totalPages; i++) {
     const pageBtn = document.createElement("button");
     pageBtn.textContent = i;
-    pageBtn.classList.add(
-      "btn",
-      "btn-sm",
-      i === currentPage ? "btn-primary" : "btn-outline-primary",
-      "mx-1"
-    );
+    pageBtn.classList.add("pagination-btn");
     pageBtn.addEventListener("click", () => {
       currentPage = i;
       renderPage();
@@ -212,7 +203,7 @@ function renderPagination() {
   const nextBtn = document.createElement("button");
   nextBtn.textContent = "Next";
   nextBtn.disabled = currentPage === totalPages;
-  nextBtn.classList.add("btn", "btn-sm", "btn-outline-primary", "mx-1");
+  nextBtn.classList.add("next-btn");
   nextBtn.addEventListener("click", () => {
     currentPage++;
     renderPage();
@@ -361,16 +352,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // navigate navbar
 
-cartIcon.addEventListener("click", () => {
-  window.location.href = "Cart/index.html";
-});
-
-login.addEventListener("click", () => {
-  window.location.href = "login/index.html";
-});
-register.addEventListener("click", () => {
-  window.location.href = "register/index.html";
-});
-logout.addEventListener("click", () => {
-  window.location.href = "login/index.html";
-});
+navAndFooter();

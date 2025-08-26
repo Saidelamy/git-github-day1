@@ -1,3 +1,5 @@
+import { navAndFooter } from "../utils/navAndFooter.js";
+
 const loginForm = document.querySelector(".loginForm");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
@@ -58,3 +60,5 @@ function loginConfirm(e) {
 }
 
 loginForm.addEventListener("submit", loginConfirm);
+
+navAndFooter();

@@ -1,3 +1,5 @@
+import { navAndFooter } from "../utils/navAndFooter.js";
+
 function productDetailsFun() {
   const productDetailsContainer = document.getElementById("product-details");
 
@@ -73,3 +75,5 @@ function productDetailsFun() {
 document.addEventListener("DOMContentLoaded", () => {
   productDetailsFun();
 });
+
+navAndFooter();
