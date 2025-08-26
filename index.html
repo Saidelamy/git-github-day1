@@ -81,6 +81,13 @@
       <div class="hero-bg"></div>
     </section>
 
+    <!-- spinner -->
+
+    <div id="spinner" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <!-- Product section -->
 
     <main class="product-container m-auto text-center">
@@ -93,12 +100,141 @@
       </div>
       <div class="product-content row">
         <aside class="col-3 text-start">
-          <h3>Filter</h3>
+          <div class="">
+            <div class="filters border p-3 rounded">
+              <h5 class="mb-3">Filters</h5>
+
+              <!-- Categories -->
+              <div class="mb-3">
+                <h6>Category</h6>
+                <div>
+                  <label
+                    ><input
+                      type="checkbox"
+                      class="filter-category"
+                      value="smartphones"
+                    />
+                    Smartphones</label
+                  ><br />
+                  <label
+                    ><input
+                      type="checkbox"
+                      class="filter-category"
+                      value="laptops"
+                    />
+                    Laptops</label
+                  ><br />
+                  <label
+                    ><input
+                      type="checkbox"
+                      class="filter-category"
+                      value="fragrances"
+                    />
+                    Fragrances</label
+                  ><br />
+                  <label
+                    ><input
+                      type="checkbox"
+                      class="filter-category"
+                      value="groceries"
+                    />
+                    Groceries</label
+                  ><br />
+                  <label
+                    ><input
+                      type="checkbox"
+                      class="filter-category"
+                      value="furniture"
+                    />
+                    Furniture</label
+                  >
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div class="mb-3">
+                <h6>Price</h6>
+                <input
+                  type="number"
+                  id="min-price"
+                  class="form-control mb-2"
+                  placeholder="Min price"
+                />
+                <input
+                  type="number"
+                  id="max-price"
+                  class="form-control"
+                  placeholder="Max price"
+                />
+              </div>
+
+              <!-- Rating -->
+              <div class="mb-3">
+                <h6>Rating</h6>
+                <label
+                  ><input type="checkbox" class="filter-rating" value="4" /> 4★
+                  & above</label
+                ><br />
+                <label
+                  ><input type="checkbox" class="filter-rating" value="3" /> 3★
+                  & above</label
+                ><br />
+                <label
+                  ><input type="checkbox" class="filter-rating" value="2" /> 2★
+                  & above</label
+                >
+              </div>
+
+              <!-- Discount -->
+              <div class="mb-3">
+                <h6>Discount</h6>
+                <label
+                  ><input type="checkbox" class="filter-discount" value="10" />
+                  10% & above</label
+                ><br />
+                <label
+                  ><input type="checkbox" class="filter-discount" value="20" />
+                  20% & above</label
+                ><br />
+                <label
+                  ><input type="checkbox" class="filter-discount" value="30" />
+                  30% & above</label
+                ><br />
+                <label
+                  ><input type="checkbox" class="filter-discount" value="50" />
+                  50% & above</label
+                >
+              </div>
+
+              <!-- Sort -->
+              <div class="mb-3">
+                <h6>Sort By</h6>
+                <select id="sort" class="form-select">
+                  <option value="">Default</option>
+                  <option value="low-high">Price: Low to High</option>
+                  <option value="high-low">Price: High to Low</option>
+                  <option value="rating-high">Rating: High to Low</option>
+                  <option value="discount-high">Discount: High to Low</option>
+                </select>
+              </div>
+
+              <button
+                id="clear-filters"
+                class="btn btn-sm btn-outline-secondary"
+              >
+                Clear Filters
+              </button>
+            </div>
+          </div>
         </aside>
+
+        <!-- product contaner -->
+
         <div class="col-9">
           <div class="row product-cards row-gap-5 products-container">
             <div class="col-4 product-card"></div>
           </div>
+          <div id="pagination" class="d-flex justify-content-center my-3"></div>
         </div>
       </div>
     </main>
