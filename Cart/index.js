@@ -35,7 +35,7 @@ function renderCart() {
             </div>
             <div class="d-flex justify-content-end align-items-center gap-3">
               <p class="text-center m-0 ">${itemTotal}$</p>
-              <button class="btn btn-sm btn-danger remove"><i class="bi bi-trash"></i></button>
+              <button class=" remove"><i class="bi bi-trash"></i></button>
             </div></div>
           </div>
 

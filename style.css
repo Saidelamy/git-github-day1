@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #e62727;
+  --secondary-color: #1e93ab;
+}
 * {
   margin: 0;
   padding: 0;
@@ -8,20 +12,27 @@ img {
   height: auto;
 }
 .login {
-  background-color: #addfdc;
-  border: 1px solid #addfdc;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 .login:hover {
-  background-color: #b2d7d5;
-  border: 1px solid #addfdc;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 .register {
-  color: #addfdc;
-  border: 1px solid #addfdc;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 .register:hover {
-  background-color: #addfdc;
-  border: 1px solid #addfdc;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.logout {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 15px;
 }
 
 .cart-container {
@@ -43,7 +54,11 @@ img {
 .avatar {
   background-color: #ffffff;
   font-size: 30px;
-  color: #addfdc;
+  color: var(--secondary-color);
+}
+
+.navbar {
+  height: 100px;
 }
 .hero {
   background-image: url(./images/hero.avif);
@@ -74,15 +89,11 @@ img {
   gap: 20px;
 }
 .hero-text button {
-  background-color: #000;
+  background-color: var(--primary-color);
   color: #fff;
   padding: 15px 30px;
   width: 50%;
   border: #000;
-}
-.hero-text button:hover {
-  background-color: #fff;
-  color: #000;
 }
 
 .hero-title {
@@ -99,7 +110,9 @@ img {
   border: 0;
   color: rgb(255, 255, 255);
   font-size: 50px;
-  background-color: rgba(0, 0, 0, 0.2);
+  padding: 15px 25px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
 }
 /* ===============================product============================= */
 
@@ -120,6 +133,11 @@ img {
   overflow: hidden;
 }
 
+.product-head h2 {
+  color: var(--secondary-color);
+  font-size: 60px;
+  margin-bottom: 30px;
+}
 .card-button {
   position: absolute;
   bottom: -100px;
@@ -147,7 +165,7 @@ img {
 .bi-bag-plus {
   font-size: 20px;
   color: #ffffff;
-  background-color: #000;
+  background-color: var(--primary-color);
   transition: 0.5s;
   padding: 8px 12px;
 }
@@ -213,7 +231,7 @@ img {
 .next-btn,
 .prev-btn {
   padding: 10px 15px;
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid var(--secondary-color);
   background-color: #fff;
   color: #000;
   transition: 0.2s;
@@ -223,7 +241,7 @@ img {
 .prev-btn:hover {
   padding: 10px 15px;
   border: 2px solid #fff;
-  background-color: rgb(0, 0, 0);
+  background-color: var(--secondary-color);
   color: #fff;
 }
 .next-btn {
@@ -232,4 +250,29 @@ img {
 
 .prev-btn {
   margin-right: 10px;
+}
+
+.clear-filter {
+  background-color: var(--primary-color);
+  color: #fff;
+  width: 100%;
+}
+
+.clear-filter:hover {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+}
+.product-content label {
+  color: #535353;
+}
+.footer-logo img {
+  font-size: 500px;
+}
+
+.list-footer {
+  background-color: #1e93ab;
+  border-radius: 50%;
+  padding: 10px 15px;
+  font-size: 30px;
+  height: 60px;
 }

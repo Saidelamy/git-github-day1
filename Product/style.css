@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #e62727;
+  --secondary-color: #1e93ab;
+}
 .hero {
   position: relative;
   width: 100%;
@@ -27,7 +31,7 @@
   font-weight: bold;
 }
 .more-span {
-  border-bottom: 3px solid #000000;
+  border-bottom: 3px solid var(--primary-color);
 }
 .imgs-conatiner img {
   width: 100%;
@@ -37,9 +41,10 @@
 .product-cart {
   font-size: 20px;
   color: #ffffff;
-  background-color: #000;
+  background-color: var(--primary-color);
   transition: 0.5s;
   padding: 8px 12px;
+  border: var(--primary-color);
 }
 .product-cart:hover {
   color: #000000;

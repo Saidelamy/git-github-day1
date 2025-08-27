@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #e62727;
+  --secondary-color: #1e93ab;
+}
 img {
   width: 100%;
   height: auto;
@@ -9,16 +13,17 @@ img {
 .product-cart {
   font-size: 20px;
   color: #ffffff;
-  background-color: #000;
+  background-color: var(--primary-color);
   transition: 0.5s;
   padding: 8px 12px;
   width: 100%;
   margin-top: 30px;
+  border: var(--primary-color);
 }
 .product-cart:hover {
-  color: #000000;
   background-color: #ffffff;
-  border: 1px solid #000;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
 }
 .card-button {
   position: absolute;
@@ -54,7 +59,9 @@ img {
 .cart-button button {
   height: 30px;
   border: 0;
-  background-color: #addfdc;
+  color: #fff;
+  padding: 2px 8px;
+  background-color: var(--secondary-color);
 }
 .col-5 {
   margin-top: 50px;
@@ -62,6 +69,12 @@ img {
   padding-top: 30px;
 }
 h6 {
-  color: #76a9a5;
+  color: var(--secondary-color);
   text-shadow: 0px 1px 1px #000000;
+}
+.remove {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px;
+  border: var(--primary-color);
 }
