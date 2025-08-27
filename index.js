@@ -2,22 +2,22 @@ import { navAndFooter } from "./utils/navAndFooter.js";
 
 let slider = [
   {
-    img: "/images/Groceries.png",
+    img: "./images/Groceries.png",
     title: "Groceries",
     desc: "Vel quo asperiores impedit fuga iure aut minima reiciendis earum, saepe ullam et dolorum dicta itaque placeat esse tempora ipsam neque cum.",
   },
   {
-    img: "/images/Furniture.png",
+    img: "./images/Furniture.png",
     title: "Furniture",
     desc: "Shop the latest trends now, Shop the latest trends now.",
   },
   {
-    img: "/images/clothes.png",
+    img: "./images/clothes.png",
     title: "Clothes",
     desc: "Vel quo asperiores impedit fuga iure aut minima reiciendis earum, saepe ullam et dolorum dicta itaque placeat esse tempora ipsam neque cum",
   },
   {
-    img: "/images/fragrances.png",
+    img: "./images/fragrances.png",
     title: "Fragrances",
     desc: "Vel quo asperiores impedit fuga iure aut minima reiciendis earum, saepe ullam et dolorum dicta itaque placeat esse tempora ipsam neque cum",
   },

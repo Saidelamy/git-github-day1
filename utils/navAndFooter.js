@@ -25,24 +25,25 @@ export function navAndFooter() {
       const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
       const userName = localStorage.getItem("username");
 
+      let usernameSpan = document.querySelector(".username");
       if (isLoggedIn) {
-        if (login) login.style.display = "none";
-        if (register) register.style.display = "none";
-        if (logout) logout.style.display = "block";
-        if (profileImg) profileImg.style.display = "block";
-        if (cartIcon) cartIcon.style.display = "block";
-        let usernameSpan = document.querySelector(".username");
+        login.style.display = "none";
+        register.style.display = "none";
+        logout.style.display = "block";
+        profileImg.style.display = "block";
+        cartIcon.style.display = "block";
+
         if (usernameSpan) {
           usernameSpan.textContent = userName;
         }
       } else {
-        if (login) login.style.display = "block";
-        if (register) register.style.display = "block";
-        if (logout) logout.style.display = "none";
-        if (profileImg) profileImg.style.display = "none";
-        if (cartIcon) cartIcon.style.display = "none";
+        login.style.display = "block";
+        register.style.display = "block";
+        logout.style.display = "none";
+        profileImg.style.display = "none";
+        cartIcon.style.display = "none";
 
-        let usernameSpan = document.querySelector(".username");
+        // let usernameSpan = document.querySelector(".username");
         if (usernameSpan) {
           usernameSpan.textContent = "";
         }
