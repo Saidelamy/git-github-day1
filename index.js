@@ -29,7 +29,6 @@ let heroImg = document.querySelector(".hero-img");
 let heroTitle = document.querySelector(".hero-title");
 let heroDesc = document.querySelector(".hero-desc");
 let heroText = document.querySelector(".hero-text");
-
 let spinner = document.getElementById("spinner");
 let productContainer = document.querySelector(".product-container");
 
@@ -307,6 +306,22 @@ function addToCart(
   rating,
   imgSrc
 ) {
+  let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  if (!isLoggedIn) {
+    swal(
+      "Login required!",
+      "Please login before adding products to cart.",
+      "warning",
+      {
+        button: "Go to Login",
+      }
+    ).then(() => {
+      window.location.href = "login/index.html";
+    });
+    return;
+  }
+
   let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
   let existingProduct = cart.find((el) => el.id === id);
@@ -350,6 +365,5 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
 });
 
-// navigate navbar
-
+// footer and navbar
 navAndFooter();

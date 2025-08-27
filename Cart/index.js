@@ -1,3 +1,4 @@
+import { navAndFooter } from "../utils/navAndFooter.js";
 function renderCart() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const cartItems = document.querySelector(".cart-items");
@@ -91,3 +92,5 @@ function renderCart() {
 }
 
 document.addEventListener("DOMContentLoaded", renderCart);
+
+navAndFooter();

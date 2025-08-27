@@ -1,4 +1,4 @@
-function getComponentPath(path, isComponent = true) {
+export function getComponentPath(path, isComponent = true) {
   const depth = window.location.pathname.split("/").length - 2;
   const prefix = "../".repeat(depth);
 
@@ -10,7 +10,6 @@ function getComponentPath(path, isComponent = true) {
 }
 
 export function navAndFooter() {
-  // تحميل النافبار
   fetch(getComponentPath("navbar.html"))
     .then((res) => res.text())
     .then((data) => {
@@ -21,6 +20,33 @@ export function navAndFooter() {
       let cartIcon = document.querySelector(".cart-icon");
       let register = document.querySelector(".register");
       let logout = document.querySelector(".logout");
+      let profileImg = document.querySelector(".profile-img");
+
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      const userName = localStorage.getItem("username");
+
+      if (isLoggedIn) {
+        if (login) login.style.display = "none";
+        if (register) register.style.display = "none";
+        if (logout) logout.style.display = "block";
+        if (profileImg) profileImg.style.display = "block";
+        if (cartIcon) cartIcon.style.display = "block";
+        let usernameSpan = document.querySelector(".username");
+        if (usernameSpan) {
+          usernameSpan.textContent = userName;
+        }
+      } else {
+        if (login) login.style.display = "block";
+        if (register) register.style.display = "block";
+        if (logout) logout.style.display = "none";
+        if (profileImg) profileImg.style.display = "none";
+        if (cartIcon) cartIcon.style.display = "none";
+
+        let usernameSpan = document.querySelector(".username");
+        if (usernameSpan) {
+          usernameSpan.textContent = "";
+        }
+      }
 
       if (logo) {
         logo.addEventListener("click", () => {
@@ -45,6 +71,8 @@ export function navAndFooter() {
       }
       if (logout) {
         logout.addEventListener("click", () => {
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("username");
           window.location.href = getComponentPath("login/index.html", false);
         });
       }

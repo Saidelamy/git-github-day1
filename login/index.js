@@ -42,9 +42,13 @@ function loginConfirm(e) {
     );
 
     if (existingUser) {
+      localStorage.setItem("username", existingUser.fullName);
+      localStorage.setItem("isLoggedIn", "true");
+
       swal("login done successfully!", "", "success", {
         button: "done!",
       });
+
       loginError.textContent = "";
 
       setTimeout(function () {

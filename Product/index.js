@@ -53,6 +53,22 @@ function productDetailsFun() {
     });
 
     document.querySelector(".add-to-cart").addEventListener("click", () => {
+      let isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+      if (!isLoggedIn) {
+        swal(
+          "Login required!",
+          "Please login before adding products to cart.",
+          "warning",
+          {
+            button: "Go to Login",
+          }
+        ).then(() => {
+          window.location.href = "../login/index.html";
+        });
+        return;
+      }
+
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const existingProduct = cart.find((el) => el.id === product.id);
 
