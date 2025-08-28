@@ -1,68 +1,80 @@
 import { navAndFooter } from "../utils/navAndFooter.js";
 
-const loginForm = document.querySelector(".loginForm");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const submitButton = document.querySelector(".submitButton");
-const emailError = document.getElementById("emailError");
-const passwordError = document.getElementById("passwordError");
-const loginError = document.getElementById("loginError");
+class Login {
+  constructor(formId) {
+    this.loginForm = document.getElementById(formId);
+    this.emailInput = document.getElementById("email");
+    this.passwordInput = document.getElementById("password");
+    this.emailError = document.getElementById("emailError");
+    this.passwordError = document.getElementById("passwordError");
+    this.loginError = document.getElementById("loginError");
 
-const regex = {
-  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
-};
+    this.regex = {
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+    };
 
-function loginConfirm(e) {
-  e.preventDefault();
-  let valid = true;
-
-  if (!regex.email.test(emailInput.value.trim())) {
-    emailError.textContent = "Please enter a valid email address.";
-    valid = false;
-  } else {
-    emailError.textContent = "";
+    // Bind event
+    this.loginForm.addEventListener("submit", (e) => this.loginConfirm(e));
   }
 
-  if (!regex.password.test(passwordInput.value)) {
-    passwordError.textContent =
-      "Password must have at least 8 numbers, uppercase letter, lowercase letter, and symbol.";
-    valid = false;
-  } else {
-    passwordError.textContent = "";
-  }
+  validateInputs() {
+    let valid = true;
 
-  if (valid) {
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    console.log(users);
-    const existingUser = users.find(
-      (user) =>
-        user.email === emailInput.value.trim() &&
-        user.password === passwordInput.value
-    );
-
-    if (existingUser) {
-      localStorage.setItem("username", existingUser.fullName);
-      localStorage.setItem("isLoggedIn", "true");
-
-      swal("login done successfully!", "", "success", {
-        button: "done!",
-      });
-
-      loginError.textContent = "";
-
-      setTimeout(function () {
-        window.location.href = "../index.html";
-      }, 1000);
-
-      loginForm.reset();
+    // email
+    if (!this.regex.email.test(this.emailInput.value.trim())) {
+      this.emailError.textContent = "Please enter a valid email address.";
+      valid = false;
     } else {
-      loginError.textContent = "email or password is incorrect";
-      false;
+      this.emailError.textContent = "";
+    }
+
+    // password
+    if (!this.regex.password.test(this.passwordInput.value)) {
+      this.passwordError.textContent =
+        "Password must have at least 8 numbers, uppercase letter, lowercase letter, and symbol.";
+      valid = false;
+    } else {
+      this.passwordError.textContent = "";
+    }
+
+    return valid;
+  }
+
+  loginConfirm(e) {
+    e.preventDefault();
+
+    if (this.validateInputs()) {
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      const existingUser = users.find(
+        (user) =>
+          user.email === this.emailInput.value.trim() &&
+          user.password === this.passwordInput.value
+      );
+
+      if (existingUser) {
+        localStorage.setItem("username", existingUser.fullName);
+        localStorage.setItem("isLoggedIn", "true");
+
+        swal("login done successfully!", "", "success", {
+          button: "done!",
+        });
+
+        this.loginError.textContent = "";
+
+        setTimeout(() => {
+          window.location.href = "../index.html";
+        }, 1000);
+
+        this.loginForm.reset();
+      } else {
+        this.loginError.textContent = "email or password is incorrect";
+      }
     }
   }
 }
 
-loginForm.addEventListener("submit", loginConfirm);
-
-navAndFooter();
+document.addEventListener("DOMContentLoaded", () => {
+  new Login("loginForm");
+  navAndFooter();
+});

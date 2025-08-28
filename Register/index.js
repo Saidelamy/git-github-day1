@@ -1,89 +1,100 @@
 import { navAndFooter } from "../utils/navAndFooter.js";
 
-const registerForm = document.querySelector(".registerForm");
-const fullNameInput = document.getElementById("fullName");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirmPassword");
-const submitButton = document.querySelector(".submitButton");
-const fullNameError = document.getElementById("fullNameError");
-const emailError = document.getElementById("emailError");
-const passwordError = document.getElementById("passwordError");
-const confirmPasswordError = document.getElementById("confirmPasswordError");
+class Register {
+  constructor(formId) {
+    this.registerForm = document.getElementById(formId);
+    this.fullNameInput = document.getElementById("fullName");
+    this.emailInput = document.getElementById("email");
+    this.passwordInput = document.getElementById("password");
+    this.confirmPasswordInput = document.getElementById("confirmPassword");
 
-const regex = {
-  fullName: /^[A-Za-z\s]{8,}$/,
-  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
-};
+    this.fullNameError = document.getElementById("fullNameError");
+    this.emailError = document.getElementById("emailError");
+    this.passwordError = document.getElementById("passwordError");
+    this.confirmPasswordError = document.getElementById("confirmPasswordError");
 
-function registerConfirm(e) {
-  e.preventDefault();
-  let valid = true;
-
-  if (!regex.fullName.test(fullNameInput.value.trim())) {
-    fullNameError.textContent =
-      "Full name must be at least 8 letters and contain only letters/spaces.";
-    valid = false;
-  } else {
-    fullNameError.textContent = "";
-  }
-
-  if (!regex.email.test(emailInput.value.trim())) {
-    emailError.textContent = "Please enter a valid email address.";
-    valid = false;
-  } else {
-    emailError.textContent = "";
-  }
-
-  if (!regex.password.test(passwordInput.value)) {
-    passwordError.textContent =
-      "Password must have at least 8 numbers, uppercase letter, lowercase letter, and symbol.";
-    valid = false;
-  } else {
-    passwordError.textContent = "";
-  }
-
-  if (passwordInput.value !== confirmPasswordInput.value) {
-    confirmPasswordError.textContent = "Passwords do not match.";
-    valid = false;
-  } else {
-    confirmPasswordError.textContent = "";
-  }
-
-  if (valid) {
-    const userData = {
-      fullName: fullNameInput.value.trim(),
-      email: emailInput.value.trim(),
-      password: passwordInput.value,
+    this.regex = {
+      fullName: /^[A-Za-z\s]{8,}$/,
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
     };
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    console.log(users);
-    const existingUser = users.find((user) => user.email === userData.email);
+    this.registerForm.addEventListener("submit", (e) =>
+      this.registerConfirm(e)
+    );
+  }
 
-    if (existingUser) {
-      emailError.textContent = "This email is already registered";
-      return;
+  validateInputs() {
+    let valid = true;
+
+    if (!this.regex.fullName.test(this.fullNameInput.value.trim())) {
+      this.fullNameError.textContent =
+        "Full name must be at least 8 letters and contain only letters/spaces.";
+      valid = false;
+    } else {
+      this.fullNameError.textContent = "";
     }
-    users.push(userData);
 
-    localStorage.setItem("users", JSON.stringify(users));
+    if (!this.regex.email.test(this.emailInput.value.trim())) {
+      this.emailError.textContent = "Please enter a valid email address.";
+      valid = false;
+    } else {
+      this.emailError.textContent = "";
+    }
 
-    swal("Register done successfully!", "تم اضافة حسابك بنجاح", "success", {
-      button: "done!",
-    });
+    if (!this.regex.password.test(this.passwordInput.value)) {
+      this.passwordError.textContent =
+        "Password must have at least 8 numbers, uppercase letter, lowercase letter, and symbol.";
+      valid = false;
+    } else {
+      this.passwordError.textContent = "";
+    }
 
-    setTimeout(function () {
-      window.location.href = "../login/index.html";
-    }, 1000);
-    // submitButton.addEventListener("click", () => {
-    //   window.location.href = "../login/index.html";
-    // });
-    registerForm.reset();
+    if (this.passwordInput.value !== this.confirmPasswordInput.value) {
+      this.confirmPasswordError.textContent = "Passwords do not match.";
+      valid = false;
+    } else {
+      this.confirmPasswordError.textContent = "";
+    }
+
+    return valid;
+  }
+
+  registerConfirm(e) {
+    e.preventDefault();
+
+    if (this.validateInputs()) {
+      const userData = {
+        fullName: this.fullNameInput.value.trim(),
+        email: this.emailInput.value.trim(),
+        password: this.passwordInput.value,
+      };
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      const existingUser = users.find((user) => user.email === userData.email);
+
+      if (existingUser) {
+        this.emailError.textContent = "This email is already registered";
+        return;
+      }
+
+      users.push(userData);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      swal("Register done successfully!", "تم اضافة حسابك بنجاح", "success", {
+        button: "done!",
+      });
+
+      setTimeout(() => {
+        window.location.href = "../login/index.html";
+      }, 1000);
+
+      this.registerForm.reset();
+    }
   }
 }
 
-registerForm.addEventListener("submit", registerConfirm);
-
-navAndFooter();
+document.addEventListener("DOMContentLoaded", () => {
+  new Register("registerForm");
+  navAndFooter();
+});
